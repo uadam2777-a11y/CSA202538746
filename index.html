@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>USMAN INTERNATIONAL HIGH SCHOOL</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url("school.png");
+      padding: 20px;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 980px;
+      min-height: 640px;
+      background: rgba(184, 187, 7, 0.9);
+      border-radius: 28px;
+      box-shadow: 0 25px 60px rgba(15, 23, 42, 0.18);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+  
+    .brand-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(255,255,255,0.2), transparent 40%);
+    }
+
+    .badge {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      border: 2px solid rgba(255, 255, 255, 0.65);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(2px);
+    }
+
+    .brand-h1 {
+      font-size: clamp(2.1rem, 3vw, 3rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+    }
+
+    .brand-subtitle {
+      font-size: 1rem;
+      opacity: 0.9;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 22px;
+    }
+
+    .feature-tag {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .form-panel {
+      background: #165ea7;
+      padding: 52px 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .form-wrap {
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #2563eb;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 2vw, 2.5rem);
+      color: #0f172a;
+      margin-bottom: 10px;
+    }
+
+    .intro {
+      color: #475569;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    input {
+      width: 100%;
+      border: 1.5px solid #cbd5e1;
+      background: white;
+      border-radius: 12px;
+      padding: 14px 14px;
+      font-size: 1rem;
+      color: #0f172a;
+      transition: 0.2s ease;
+    }
+ </style>
+</head>
+<body>
+  <div class="login-container">
+        <div class="school-icon"> </div>
+        <h1>USMAN INTERNATIONAL</h1>
+        <h1>HIGH SCHOOL</h1>
+        <p class="subtitle">STUDENT PORTAL</p>
+        <h2>Welcome Back!</h2>
+        <p class="description">
+            Please log in to access your student dashboard.
+        </p>
+        <form id="loginForm" action="calculator.html" method="get">
+            <label for="username">Username</label>
+            <input
+                type="text"
+                id="username"
+                placeholder="Enter your username"
+                required
+            >
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+            >
+            <button type="submit">LOGIN TO PORTAL</button>
+            <p id="message"></p>
+        </form>
+
+        <div class="footer">
+            <p>School Address / Matric Number</p>
+            <p>CSA/2025/38746</p>
+            <p>&copy; 2026 Usman International High School</p>
+            <p>Excellence • Discipline • Success</p>
+        </div>
+    </div>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const message = document.getElementById("message");
+            if (username === "Emmy" && password === "Emmy") {
+                window.location.href="calculator.html";
+                message.textContent = "Login successful! Welcome to your portal.";
+            } else {
+                message.style.color = "#f87171";
+                message.textContent = "Incorrect username or password!";
+            }
+        });
+    </script>
+</body>
+</html>

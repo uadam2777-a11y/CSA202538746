@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("school.png");
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator {
+            background: #222;
+            padding: 20px;
+            border-radius: 15px;
+            width: 280px;
+        }
+        #display {
+            width: 100%;
+            height: 60px;
+            font-size: 28px;
+            text-align: right;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        button {
+            height: 55px;
+            font-size: 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #444;
+            color: white;
+        }
+        button:hover { background: #666; }
+        .operator { background: #ff9500; }
+        .clear { background: #e53935; }
+        .equal { background: #2196f3; }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" value="0" readonly>
+        <div class="buttons">
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button onclick="deleteLast()">DEL</button>
+            <button class="operator" onclick="chooseOperator('%')">%</button>
+            <button class="operator" onclick="chooseOperator('/')">÷</button>
+            <button onclick="addNumber('7')">7</button>
+            <button onclick="addNumber('8')">8</button>
+            <button onclick="addNumber('9')">9</button>
+            <button class="operator" onclick="chooseOperator('*')">×</button>
+            <button onclick="addNumber('4')">4</button>
+            <button onclick="addNumber('5')">5</button>
+            <button onclick="addNumber('6')">6</button>
+            <button class="operator" onclick="chooseOperator('-')">−</button>
+            <button onclick="addNumber('1')">1</button>
+            <button onclick="addNumber('2')">2</button>
+            <button onclick="addNumber('3')">3</button>
+            <button class="operator" onclick="chooseOperator('+')">+</button>
+            <button onclick="addNumber('0')">0</button>
+            <button onclick="addNumber('.')">.</button>
+            <button class="equal" onclick="calculate()" style="grid-column: span 2">=</button>
+        </div>
+    </div>
+    <script>
+        const display = document.getElementById("display");
+        let firstNumber = null;
+        let operator = null;
+        let startNewNumber = true;
+        function addNumber(number) {
+            if (startNewNumber) {
+                display.value = number === "." ? "0." : number;
+                startNewNumber = false;
+                return;
+            }
+            if (number === "." && display.value.includes(".")) return;
+            if (display.value === "0" && number !== ".") {
+                display.value = number;
+            } else {
+                display.value += number;
+            }
+        }
+        function chooseOperator(op) {
+            if (op === "%") {
+                display.value = Number(display.value) / 100;
+                startNewNumber = true;
+                return;
+            }
+            firstNumber = Number(display.value);
+            operator = op;
+            startNewNumber = true;
+        }
+        function calculate() {
+            if (operator === null || firstNumber === null) return;
+            const secondNumber = Number(display.value);
+            let result;
+            switch (operator) {
+                case "+": result = firstNumber + secondNumber; break;
+                case "-": result = firstNumber - secondNumber; break;
+                case "*": result = firstNumber * secondNumber; break;
+                case "/":
+                    result = secondNumber === 0
+                        ? "Cannot divide by zero"
+                        : firstNumber / secondNumber;
+                    break;
+            }
+            display.value = typeof result === "number"
+                ? String(Number(result.toPrecision(12)))
+                : result;
+            firstNumber = null;
+            operator = null;
+            startNewNumber = true;
+        }
+        function clearDisplay() {
+            display.value = "0";
+            firstNumber = null;
+            operator = null;
+            startNewNumber = true;
+        }
+        function deleteLast() {
+            if (startNewNumber) return;
+            display.value = display.value.length > 1
+                ? display.value.slice(0, -1)
+                : "0";
+            if (display.value === "-") display.value = "0";
+        }
+    </script>
+</body>
+</html>
